@@ -7,8 +7,8 @@ import json
 
 # Hardcoded values
 VERBOSE = True
-DESTINATION = '/Users/furkan.akman/Desktop/'  # Adjust to your actual destination path
-JSON_PATH = '/Users/furkan.akman/Desktop/vol1.json'  # Path to your JSON file
+DESTINATION = '/path/to/folder'  # Adjust to your actual destination path
+JSON_PATH = '/path/to/the.json'  # Path to your JSON file
 
 def vprint(txt: str, end: str = "\n"):
     if VERBOSE:
