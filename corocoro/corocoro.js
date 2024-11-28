@@ -1,11 +1,7 @@
---Step 1
-------------------------------------------------------------------------------------------
 var script = document.createElement('script');
 script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js';
 document.head.appendChild(script);
 
--- Step 2
-------------------------------------------------------------------------------------------
 (function (console) {
     console.save = function (data, filename) {
         if (!data) {
