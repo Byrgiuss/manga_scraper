@@ -22,7 +22,8 @@ document.head.appendChild(script);
         a.download = filename;
         a.href = window.URL.createObjectURL(blob);
         a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
-        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0,
+                         false, false, false, false, 0, null);
         a.dispatchEvent(e);
     };
 })(console);
@@ -65,8 +66,8 @@ function downloadAllImagesAsZip() {
             setTimeout(() => {
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
-                canvas.width = img.naturalWidth; // Use naturalWidth/naturalHeight
-                canvas.height = img.naturalHeight; // These provide the actual dimensions of the image
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
                 context.drawImage(img, 0, 0);
                 canvas.toBlob(blob => {
                     if (blob) {
@@ -77,7 +78,7 @@ function downloadAllImagesAsZip() {
                         resolve();
                     }
                 }, 'image/png');
-            }, 100); // Small delay to ensure proper rendering
+            }, 100);
         });
     });
 
@@ -99,13 +100,17 @@ window.addEventListener("click", event => {
     });
 });
 
-window.addEventListener("keydown", event => {
-    if (event.key == 's') {
+function onKeydown(event) {
+    if (event.key === 's') {
         console.save(page_urls, `urls_scrap-${document.title}.json`);
-    } else if (event.key == 'd') {
+    } else if (event.key === 'd') {
         downloadAllImagesAsZip();
     }
-});
+}
+if (!window.__manga_keydown_bound) {
+    window.addEventListener("keydown", onKeydown);
+    window.__manga_keydown_bound = true;
+}
 
 // Start monitoring for new images being added to the page
 monitorImages();
